@@ -3,185 +3,243 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Artiflex IA - O Futuro do Atendimento Inteligente</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Gabriel Abel - Desenvolvedor Full Stack</title>
+    <link rel="stylesheet" href="styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Orbitron:wght@400;500;700;900&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="shortcut icon" href="img/artiflex.png" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="shortcut icon" href="logoabel.png" type="image/x-icon">
 </head>
-<body class="antialiased">
-
-    <div id="preloader">
-        <div class="spinner-container">
-            <div class="spinner"></div>
-            <div class="preloader-text">ARTIFLEX IA</div>
-        </div>
-    </div>
-
-    <header class="fixed top-0 left-0 right-0 z-50 transition-all duration-300" id="mainHeader">
-        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <h1 class="text-3xl font-orbitron font-bold text-white">
-                <span class="text-sky-400">Arti</span>flex<span class="text-purple-500">IA</span>
-            </h1>
-            <nav class="hidden md:flex space-x-8">
-                <a href="#hero" class="text-slate-300 hover:text-sky-400 transition-colors text-lg font-rajdhani font-semibold">Início</a>
-                <a href="#innovation" class="text-slate-300 hover:text-sky-400 transition-colors text-lg font-rajdhani font-semibold">A Inovação</a>
-                <a href="#services" class="text-slate-300 hover:text-sky-400 transition-colors text-lg font-rajdhani font-semibold">Serviços</a>
-                <a href="#benefits" class="text-slate-300 hover:text-sky-400 transition-colors text-lg font-rajdhani font-semibold">Vantagens</a>
-                <a href="#chatDemo" class="text-slate-300 hover:text-sky-400 transition-colors text-lg font-rajdhani font-semibold">Demo IA</a>
-                <a href="#about" class="text-slate-300 hover:text-sky-400 transition-colors text-lg font-rajdhani font-semibold">Quem Somos Nós</a>
-                <a href="#cta" class="text-slate-300 hover:text-sky-400 transition-colors text-lg font-rajdhani font-semibold">Contato</a>
-            </nav>
-            <button id="mobileMenuButton" class="md:hidden text-slate-300 hover:text-sky-400 focus:outline-none">
-                <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
-            </button>
-        </div>
-        <div id="mobileMenu" class="hidden md:hidden bg-slate-900/95 backdrop-blur-lg">
-            <a href="#hero" class="block py-3.5 px-6 text-slate-300 hover:bg-slate-700/50 hover:text-sky-400 transition-colors font-rajdhani text-lg">Início</a>
-            <a href="#innovation" class="block py-3.5 px-6 text-slate-300 hover:bg-slate-700/50 hover:text-sky-400 transition-colors font-rajdhani text-lg">A Inovação</a>
-            <a href="#services" class="block py-3.5 px-6 text-slate-300 hover:bg-slate-700/50 hover:text-sky-400 transition-colors font-rajdhani text-lg">Serviços</a>
-            <a href="#benefits" class="block py-3.5 px-6 text-slate-300 hover:bg-slate-700/50 hover:text-sky-400 transition-colors font-rajdhani text-lg">Vantagens</a>
-            <a href="#chatDemo" class="block py-3.5 px-6 text-slate-300 hover:bg-slate-700/50 hover:text-sky-400 transition-colors font-rajdhani text-lg">Demo IA</a>
-            <a href="#about" class="block py-3.5 px-6 text-slate-300 hover:bg-slate-700/50 hover:text-sky-400 transition-colors font-rajdhani text-lg">Quem Somos Nós</a>
-            <a href="#cta" class="block py-3.5 px-6 text-slate-300 hover:bg-slate-700/50 hover:text-sky-400 transition-colors font-rajdhani text-lg">Contato</a>
-        </div>
-    </header>
-
-    <section id="hero" class="hero-section dynamic-gradient-bg min-h-screen flex items-center justify-center text-center relative overflow-hidden pt-28 pb-16 md:pt-36">
-        <canvas id="particle-canvas"></canvas>
-        <div class="container mx-auto px-6 hero-content">
-            <div class="hero-title-container animate-on-scroll" style="animation-delay: 0.2s;">
-                <h2 id="heroTitle" class="text-5xl md:text-6xl lg:text-7xl font-orbitron font-black text-white mb-6">
-                   
-                </h2>
+<body>
+    <!-- Navegação -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <span>&lt;/GA&gt;</span>
             </div>
-            <p id="heroSubtitle" class="text-lg md:text-xl text-slate-300 mb-12 max-w-3xl mx-auto font-rajdhani font-medium">
-                
-            </p>
-            <a href="#innovation" class="btn btn-primary text-lg md:text-xl animate-on-scroll" style="animation-delay: 2.5s;">
-                Desvende o Futuro Agora
-            </a>
-        </div>
-    </section>
-
-    <section id="innovation" class="py-24 bg-slate-950/70 backdrop-blur-sm">
-        <div class="container mx-auto px-6">
-            <div class="text-center mb-20">
-                <h3 data-text="Mais que um Chatbot: Uma Revolução Inteligente" class="glitch-effect font-rajdhani font-bold text-white mb-4 animate-on-scroll section-title-underline">Mais que um Chatbot: <br class="md:hidden">Uma <span class="text-sky-400">Revolução Inteligente</span></h3>
-                <p class="text-slate-300 text-lg max-w-2xl mx-auto animate-on-scroll" style="animation-delay: 0.2s;">Entenda o poder da nossa IA e como ela transforma a interação com seus clientes.</p>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#home" class="nav-link">Início</a></li>
+                <li><a href="#about" class="nav-link">Sobre</a></li>
+                <li><a href="#projects" class="nav-link">Projetos</a></li>
+                <li><a href="#skills" class="nav-link">Skills</a></li>
+                <li><a href="#contact" class="nav-link">Contato</a></li>
+                <li>
+                    <button class="theme-toggle" id="themeToggle">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                </li>
+            </ul>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
             </div>
-            <div class="grid md:grid-cols-2 gap-16 items-center">
-                <div class="animate-on-scroll" style="animation-delay: 0.3s;">
-                    <img src="img/neura.png" alt="[Descrição da sua imagem sobre Inteligência Artificial]" class="rounded-xl shadow-2xl w-full h-auto object-cover border-2 border-sky-500/40 hover:border-sky-400 transition-all duration-300" onerror="this.onerror=null;this.src='https://placehold.co/600x450/1E293B/94A3B8?text=Erro+ao+Carregar+Imagem';this.alt='[Erro ao carregar imagem]';">
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-background">
+            <div class="gradient-orb orb-1"></div>
+            <div class="gradient-orb orb-2"></div>
+            <div class="gradient-orb orb-3"></div>
+        </div>
+        <div class="hero-content">
+            <div class="hero-text">
+                <span class="hello">Olá, eu sou</span>
+                <h1 class="hero-title">
+                    <span class="highlight">Gabriel Abel</span>
+                </h1>
+                <div class="typing-container">
+                    <h2 class="typing-text">
+                        <span class="typing" id="typing"></span>
+                        <span class="cursor">|</span>
+                    </h2>
                 </div>
-                <div class="animate-on-scroll" style="animation-delay: 0.5s;">
-                    <h4 class="text-3xl font-rajdhani font-semibold text-white mb-6">O Motor de IA por Trás da Mágica</h4>
-                    <p class="text-slate-300 mb-5 leading-relaxed text-base">
-                        Cansado de chatbots que não entendem seus clientes? Nossa tecnologia utiliza um motor de Inteligência Artificial de ponta, permitindo conversas fluidas, personalizadas e que realmente solucionam problemas. Esqueça respostas prontas e limitadas.
-                    </p>
-                    <p class="text-slate-300 leading-relaxed text-base">
-                        Seu assistente virtual aprenderá continuamente com cada interação, adaptando-se às necessidades do seu negócio e dos seus clientes, tornando-se cada vez mais eficiente e preciso.
-                    </p>
-                    <ul id="innovationList" class="mt-8 space-y-4">
-                        
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="services" class="py-24 bg-slate-950">
-        <div class="container mx-auto px-6">
-            <div class="text-center mb-20">
-                <h3 data-text="Integração Perfeita Onde Você Precisa" class="glitch-effect font-rajdhani font-bold text-white mb-4 animate-on-scroll section-title-underline">Integração Perfeita <br class="md:hidden"><span class="text-purple-500">Onde Você Precisa</span></h3>
-                <p class="text-slate-300 text-lg max-w-2xl mx-auto animate-on-scroll" style="animation-delay: 0.2s;">Nossas soluções de IA se adaptam ao seu ecossistema digital.</p>
-            </div>
-            <div class="grid md:grid-cols-2 gap-10">
-                <div class="tech-card animate-on-scroll" style="animation-delay: 0.3s;">
-                    <div class="tech-card-content">
-                        <div class="icon-container flex items-center justify-center w-20 h-20 mb-8 rounded-full bg-sky-600/10 text-sky-400 border-2 border-sky-600/30">
-                            <svg class="w-10 h-10" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
-                        </div>
-                        <h4 class="text-3xl font-rajdhani font-semibold text-white mb-4">Assistente Virtual para Websites</h4>
-                        <p class="text-slate-300 leading-relaxed text-base">
-                            Implemente um assistente inteligente diretamente no seu site, oferecendo suporte instantâneo, qualificação de leads e engajamento personalizado aos seus visitantes 24/7.
-                        </p>
-                    </div>
-                </div>
-                <div class="tech-card animate-on-scroll" style="animation-delay: 0.5s;">
-                     <div class="tech-card-content">
-                        <div class="icon-container flex items-center justify-center w-20 h-20 mb-8 rounded-full bg-purple-600/10 text-purple-400 border-2 border-purple-600/30">
-                            <svg class="w-10 h-10" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path></svg>
-                        </div>
-                        <h4 class="text-3xl font-rajdhani font-semibold text-white mb-4">Assistente Virtual para WhatsApp</h4>
-                        <p class="text-slate-300 leading-relaxed text-base">
-                            Leve a inteligência para o canal de comunicação mais popular. Atenda clientes, automatize respostas, envie notificações e feche negócios diretamente pelo WhatsApp com uma IA que entende de verdade.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="benefits" class="py-24 bg-slate-950/70 backdrop-blur-sm">
-        <div class="container mx-auto px-6">
-            <div class="text-center mb-20">
-                <h3 data-text="Vantagens que Transformam Seu Negócio" class="glitch-effect font-rajdhani font-bold text-white mb-4 animate-on-scroll section-title-underline">Vantagens que <br class="md:hidden"><span class="text-sky-400">Transformam Seu Negócio</span></h3>
-                <p class="text-slate-300 text-lg max-w-2xl mx-auto animate-on-scroll" style="animation-delay: 0.2s;">Descubra como nossa IA pode impulsionar seus resultados e otimizar processos.</p>
-            </div>
-            <div id="benefitsGrid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
-               
-            </div>
-        </div>
-    </section>
-
-    <section id="chatDemo" class="py-24 bg-slate-950">
-        <div class="container mx-auto px-6">
-            <div class="text-center mb-16">
-                <h3 data-text="Experimente Nossa IA em Ação" class="glitch-effect font-rajdhani font-bold text-white mb-4 animate-on-scroll section-title-underline">Experimente Nossa IA <br class="md:hidden"><span class="text-pink-500">em Ação</span></h3>
-                <p class="text-slate-300 text-lg max-w-2xl mx-auto animate-on-scroll" style="animation-delay: 0.2s;">
-                    Interaja com uma demonstração do nosso assistente virtual. 
-                    <span class="block text-sm mt-2 text-slate-400">(Esta é uma simulação para fins ilustrativos. A integração real utiliza motores de IA avançados.)</span>
+                <p class="hero-description">
+                    Desenvolvedor Full Stack apaixonado por criar soluções inovadoras
+                    e experiências digitais incríveis.
                 </p>
+                <div class="hero-buttons">
+                    <a href="#projects" class="btn btn-primary">
+                        <span>Ver Projetos</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                    <a href="#contact" class="btn btn-secondary">
+                        <span>Fale Comigo</span>
+                        <i class="fas fa-paper-plane"></i>
+                    </a>
+                </div>
+                <div class="social-links">
+                    <a href="https://www.instagram.com/abelzaum/" target="_blank" class="social-icon" aria-label="Instagram">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                </div>
             </div>
-            <div class="max-w-2xl mx-auto p-4 md:p-6 bg-slate-800/50 rounded-xl shadow-2xl border border-slate-700/50 animate-on-scroll" style="animation-delay: 0.4s;">
-                <div id="chatDemoContainer" class="h-[400px] md:h-[500px]">
-                    <div class="flex flex-col items-center justify-center h-full">
-                        <p class="text-slate-400 mb-4">Clique abaixo para iniciar uma conversa com nosso assistente virtual simulado.</p>
-                        <button id="openChatButton" class="btn btn-primary text-lg">Conversar com Artiflex IA</button>
+            <div class="hero-image">
+                <div class="glass-card profile-card">
+                    <div class="profile-image">
+                        <img src="IMG_0171.png" alt="Gabriel Abel">
+                    </div>
+                    <div class="floating-elements">
+                        <div class="floating-icon">
+                            <i class="fab fa-react"></i>
+                        </div>
+                        <div class="floating-icon">
+                            <i class="fab fa-js"></i>
+                        </div>
+                        <div class="floating-icon">
+                            <i class="fab fa-python"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <span>Scroll</span>
+            <div class="scroll-line"></div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">01.</span>
+                <h2 class="section-title">Sobre Mim</h2>
+                <div class="section-line"></div>
+            </div>
+            <div class="about-content">
+                <div class="about-image">
+                    <div class="glass-card about-card">
+                        <div class="about-image-wrapper">
+                            <img src="IMG_0170.png" alt="Sobre mim">
+                            <div class="image-overlay"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-text">
+                    <p class="about-intro">
+                        Desenvolvedor Full Stack com <strong>2 anos de experiência</strong> criando
+                        aplicações web modernas e escaláveis.
+                    </p>
+                    <p>
+                        Especializado em React, Node.js, Python e cloud computing. 
+                        Apaixonado por resolver problemas complexos e entregar 
+                        soluções que fazem a diferença.
+                    </p>
+                    <div class="stats">
+                        <div class="stat-item">
+                            <div class="stat-number">15+</div>
+                            <div class="stat-label">Projetos</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">8+</div>
+                            <div class="stat-label">Clientes</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">2</div>
+                            <div class="stat-label">Anos Exp.</div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="about" class="py-24 bg-slate-950/70 backdrop-blur-sm">
-        <div class="container mx-auto px-6">
-            <div class="text-center mb-20">
-                <h3 data-text="Quem Somos Nós" class="glitch-effect font-rajdhani font-bold text-white mb-4 animate-on-scroll section-title-underline">Quem <span class="text-sky-400">Somos Nós</span></h3>
-                <p class="text-slate-300 text-lg max-w-2xl mx-auto animate-on-scroll" style="animation-delay: 0.2s;">Conheça a equipe por trás da Artiflex IA</p>
+    <!-- Projects Section -->
+    <section id="projects" class="projects">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">02.</span>
+                <h2 class="section-title">Projetos em Destaque</h2>
+                <div class="section-line"></div>
             </div>
-            <div class="max-w-4xl mx-auto">
-                <div class="grid md:grid-cols-1 gap-8">
-                    <div class="tech-card animate-on-scroll" style="animation-delay: 0.3s;">
-                        <div class="tech-card-content text-center">
-                            <div class="flex items-center justify-center mb-6 mx-auto">
-                                <img src="img/IMG_0170.png" alt="Gabriel Abel" class="w-32 h-32 md:w-40 md:h-40 rounded-full object-cover border-4 border-sky-500/50 shadow-2xl hover:border-sky-400 transition-all duration-300">
+            <div class="projects-grid">
+                <!-- Projeto 1 -->
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&h=400&fit=crop" alt="Projeto 2">
+                        <div class="project-overlay">
+                            <div class="project-links">
+                                <a href="#" class="project-link">
+                                    <i class="fas fa-external-link-alt"></i>
+                                </a>
+                                <a href="#" class="project-link">
+                                    <i class="fab fa-github"></i>
+                                </a>
                             </div>
-                            <h4 class="text-3xl font-rajdhani font-semibold text-white mb-4">Gabriel Abel</h4>
-                            <p class="text-slate-300 leading-relaxed text-base mb-6">
-                                Desenvolvedor Full Stack apaixonado por criar soluções inovadoras e experiências digitais incríveis. 
-                                Especializado em React, Node.js, Python e cloud computing, com 2 anos de experiência criando aplicações web modernas e escaláveis.
-                            </p>
-                            <a href="https://gabrielabeldev.vercel.app/" 
-                               target="_blank" 
-                               rel="noopener noreferrer"
-                               class="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-sky-500 to-purple-600 text-white rounded-lg font-rajdhani font-semibold hover:from-sky-600 hover:to-purple-700 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl">
-                                <span>Ver Portfólio</span>
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
-                            </a>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">Dashboard Analytics</h3>
+                        <p class="project-description">
+                            Dashboard interativo com visualizações de dados em tempo real 
+                            usando D3.js e Python.
+                        </p>
+                        <div class="project-tags">
+                            <span class="tag">Python</span>
+                            <span class="tag">D3.js</span>
+                            <span class="tag">Chart.js</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Projeto 2 -->
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?w=600&h=400&fit=crop" alt="Projeto 5">
+                        <div class="project-overlay">
+                            <div class="project-links">
+                                <a href="#" class="project-link">
+                                    <i class="fas fa-external-link-alt"></i>
+                                </a>
+                                <a href="#" class="project-link">
+                                    <i class="fab fa-github"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">Landing Page Premium</h3>
+                        <p class="project-description">
+                            Landing page moderna e otimizada para conversão com 
+                            animações fluidas.
+                        </p>
+                        <div class="project-tags">
+                            <span class="tag">HTML5</span>
+                            <span class="tag">CSS3</span>
+                            <span class="tag">GSAP</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Projeto 3 -->
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=600&h=400&fit=crop" alt="Projeto 6">
+                        <div class="project-overlay">
+                            <div class="project-links">
+                                <a href="#" class="project-link">
+                                    <i class="fas fa-external-link-alt"></i>
+                                </a>
+                                <a href="#" class="project-link">
+                                    <i class="fab fa-github"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">Plataforma SaaS</h3>
+                        <p class="project-description">
+                            Plataforma SaaS multi-tenant com microserviços e 
+                            deploy na AWS.
+                        </p>
+                        <div class="project-tags">
+                            <span class="tag">Microservices</span>
+                            <span class="tag">AWS</span>
+                            <span class="tag">Docker</span>
                         </div>
                     </div>
                 </div>
@@ -189,64 +247,182 @@
         </div>
     </section>
 
-    <section id="cta" class="py-28 dynamic-gradient-bg"> 
-        <div class="container mx-auto px-6 text-center">
-            <div class="relative z-10">
-                <h3 class="text-4xl md:text-5xl lg:text-6xl font-orbitron font-black text-white mb-8 animate-on-scroll">Pronto para o Próximo Nível? <br class="sm:hidden"/> Fale com a Artiflex IA!</h3>
-                <p class="text-slate-200 text-lg md:text-xl mb-12 max-w-xl mx-auto animate-on-scroll font-rajdhani font-medium" style="animation-delay: 0.2s;">
-                    Vamos conversar sobre como nossa Inteligência Artificial pode impulsionar seus resultados e encantar seus clientes.
-                </p>
-                <a href="https://wa.me/554792062394?text=Ol%C3%A1!%20Tenho%20interesse%20em%20uma%20demonstra%C3%A7%C3%A3o%20do%20Artiflex%20IA." 
-                   target="_blank" 
-                   class="btn btn-secondary text-lg md:text-xl border-2 border-sky-300 hover:border-sky-400 hover:text-slate-950 animate-on-scroll" 
-                   style="animation-delay: 0.4s;">
-                    Solicite uma Demonstração
-                </a>
+    <!-- Skills Section -->
+    <section id="skills" class="skills">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">03.</span>
+                <h2 class="section-title">Skills & Tecnologias</h2>
+                <div class="section-line"></div>
+            </div>
+            <div class="skills-content">
+                <div class="skill-category">
+                    <div class="skill-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <h3>Frontend</h3>
+                    <div class="skill-items">
+                        <div class="skill-item">
+                            <i class="fab fa-html5"></i>
+                            <span>HTML5</span>
+                        </div>
+                        <div class="skill-item">
+                            <i class="fab fa-css3-alt"></i>
+                            <span>CSS3</span>
+                        </div>
+                        <div class="skill-item">
+                            <i class="fab fa-js"></i>
+                            <span>JavaScript</span>
+                        </div>
+                        <div class="skill-item">
+                            <i class="fab fa-react"></i>
+                            <span>React</span>
+                        </div>
+                        <div class="skill-item">
+                            <i class="fab fa-vue"></i>
+                            <span>Vue.js</span>
+                        </div>
+                        <div class="skill-item">
+                            <i class="fab fa-sass"></i>
+                            <span>SASS</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <div class="skill-icon">
+                        <i class="fas fa-server"></i>
+                    </div>
+                    <h3>Backend</h3>
+                    <div class="skill-items">
+                        <div class="skill-item">
+                            <i class="fab fa-node"></i>
+                            <span>Node.js</span>
+                        </div>
+                        <div class="skill-item">
+                            <i class="fab fa-python"></i>
+                            <span>Python</span>
+                        </div>
+                        <div class="skill-item">
+                            <i class="fab fa-php"></i>
+                            <span>PHP</span>
+                        </div>
+                        <div class="skill-item">
+                            <i class="fab fa-java"></i>
+                            <span>Java</span>
+                        </div>
+                        <div class="skill-item">
+                            <i class="fas fa-database"></i>
+                            <span>PostgreSQL</span>
+                        </div>
+                        <div class="skill-item">
+                            <i class="fas fa-leaf"></i>
+                            <span>MongoDB</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <div class="skill-icon">
+                        <i class="fas fa-tools"></i>
+                    </div>
+                    <h3>Ferramentas</h3>
+                    <div class="skill-items">
+                        <div class="skill-item">
+                            <i class="fab fa-git-alt"></i>
+                            <span>Git</span>
+                        </div>
+                        <div class="skill-item">
+                            <i class="fab fa-docker"></i>
+                            <span>Docker</span>
+                        </div>
+                        <div class="skill-item">
+                            <i class="fab fa-aws"></i>
+                            <span>AWS</span>
+                        </div>
+                        <div class="skill-item">
+                            <i class="fab fa-linux"></i>
+                            <span>Linux</span>
+                        </div>
+                        <div class="skill-item">
+                            <i class="fas fa-network-wired"></i>
+                            <span>CI/CD</span>
+                        </div>
+                        <div class="skill-item">
+                            <i class="fab fa-figma"></i>
+                            <span>Figma</span>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
-    <footer class="py-12 bg-slate-950 text-center border-t border-slate-800">
-        <div class="container mx-auto px-6">
-            <p class="text-slate-400 text-sm font-rajdhani">
-                &copy; <span id="currentYear"></span> Artiflex IA. Todos os direitos reservados.
-            </p>
-            
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">04.</span>
+                <h2 class="section-title">Fale Comigo</h2>
+                <div class="section-line"></div>
+            </div>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <h3 class="contact-subtitle">Vamos trabalhar juntos?</h3>
+                    <p class="contact-description">
+                        Estou sempre aberto para discutir novos projetos, 
+                        ideias criativas ou oportunidades de colaboração.
+                    </p>
+                    <div class="contact-methods">
+                        <div class="contact-method">
+                            <div class="method-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div class="method-info">
+                                <h4>Email</h4>
+                                <p>gs932664@gmail.com</p>
+                            </div>
+                        </div>
+                        <div class="contact-method">
+                            <div class="method-icon">
+                                <i class="fab fa-whatsapp"></i>
+                            </div>
+                            <div class="method-info">
+                                <h4>WhatsApp</h4>
+                                <p>+55 47 99108-2731</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="social-links-large">
+                        <a href="https://www.instagram.com/abelzaum/" target="_blank" class="social-link-large">
+                            <i class="fab fa-instagram"></i>
+                            <span>Instagram</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <span>&lt;/GA&gt;</span>
+                </div>
+                <p class="footer-text">
+                    
+                </p>
+                <div class="footer-social">
+                    <a href="https://www.instagram.com/abelzaum/" target="_blank" class="footer-social-icon">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                </div>
+            </div>
         </div>
     </footer>
 
-    <div id="chatFabContainer" class="fixed bottom-6 right-6 z-[60] transition-opacity duration-300 opacity-0">
-        <button id="chatFab" class="p-4 bg-gradient-to-br from-sky-500 to-purple-600 text-white rounded-full shadow-xl hover:from-sky-600 hover:to-purple-700 focus:outline-none focus:ring-4 focus:ring-sky-500/50 transform hover:scale-110 transition-transform">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
-            </svg>
-        </button>
-    </div>
-
-    <div id="chatWindow" class="fixed bottom-20 right-6 md:bottom-24 md:right-8 w-[calc(100%-3rem)] max-w-md h-[70vh] max-h-[500px] bg-slate-800/80 backdrop-blur-md rounded-xl shadow-2xl border border-slate-700 flex flex-col transition-all duration-500 ease-in-out opacity-0 transform translate-y-10 scale-95 hidden z-[70]">
-        <div class="chat-header flex items-center justify-between p-4 border-b border-slate-700">
-            <div class="flex items-center">
-                <div class="w-3 h-3 bg-green-400 rounded-full mr-2"></div>
-                <h3 class="font-rajdhani text-lg font-semibold text-white">Artiflex IA Assistente</h3>
-            </div>
-            <button id="closeChatButton" class="text-slate-400 hover:text-white">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-                </svg>
-            </button>
-        </div>
-        <div id="chatMessages" class="flex-grow p-4 space-y-3 overflow-y-auto scroll-smooth">
-            </div>
-        <div class="chat-input-area p-3 border-t border-slate-700 flex items-center space-x-2">
-            <input type="text" id="chatInput" placeholder="Digite sua mensagem..." class="flex-grow p-2.5 bg-slate-700/50 border border-slate-600 rounded-lg text-slate-200 focus:ring-2 focus:ring-sky-500 focus:border-sky-500 outline-none placeholder-slate-400 text-sm">
-            <button id="chatSendButton" class="p-2.5 bg-sky-500 hover:bg-sky-600 text-white rounded-lg transition-colors">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                    <path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 16.571V11a1 1 0 112 0v5.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z" />
-                </svg>
-            </button>
-        </div>
-    </div>
-
-    <script src="js/script.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
