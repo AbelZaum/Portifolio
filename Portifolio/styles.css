@@ -460,18 +460,22 @@ nav {
 
 .email-big {
     font-family: var(--font-display);
-    font-size: 7vw;
+    /* DIMINUÍDO DE 7vw PARA 4vw (Mais elegante) */
+    font-size: 4vw; 
     color: var(--text-color);
     text-decoration: none;
     line-height: 1;
     font-weight: 800;
     transition: 0.3s;
     word-break: break-all;
+    margin-top: 10px;
+    display: inline-block;
 }
 
 .email-big:hover { 
     color: var(--accent); 
     -webkit-text-stroke: 1px var(--accent);
+    transform: translateX(10px); /* Leve movimento ao passar o mouse */
 }
 
 .footer-bottom {
@@ -558,10 +562,8 @@ nav {
     }
 
     .about-title { 
-        /* O AJUSTE MÁGICO: */
-        font-size: 10.5vw; /* Reduzi para caber "ARCHITECT" */
+        font-size: 10.5vw;
         line-height: 0.95;
-        word-wrap: break-word; /* Segurança */
         margin-bottom: 25px;
     }
 
@@ -581,8 +583,11 @@ nav {
 
     /* 6. Footer */
     .footer { padding: 60px 20px; height: auto; min-height: 80vh; }
-    .email-big { font-size: 10vw; word-break: break-all; }
+    .email-big { 
+        font-size: 7vw; /* Diminuído de 11vw para 7vw */
+    }
     .footer-bottom { flex-direction: column; gap: 30px; align-items: flex-start; }
     .socials { flex-direction: column; gap: 15px; }
 }
+
 
