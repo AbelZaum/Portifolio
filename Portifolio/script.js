@@ -1,244 +1,207 @@
-// Typing Effect
-const typingTexts = [
-    'Desenvolvedor Full Stack',
-    'Desenvolvedor Frontend',
-    'Desenvolvedor Backend',
-    'UI/UX Designer'
-];
-
-let currentTextIndex = 0;
-let currentCharIndex = 0;
-let isDeleting = false;
-
-function typeEffect() {
-    const typingElement = document.getElementById('typing');
+document.addEventListener("DOMContentLoaded", () => {
     
-    if (!typingElement) return;
-
-    const currentText = typingTexts[currentTextIndex];
+    // 1. LENIS SMOOTH SCROLL
+    let lenis;
+    const content = document.getElementById('content-skew');
     
-    if (isDeleting) {
-        typingElement.textContent = currentText.substring(0, currentCharIndex - 1);
-        currentCharIndex--;
-        
-        if (currentCharIndex === 0) {
-            isDeleting = false;
-            currentTextIndex = (currentTextIndex + 1) % typingTexts.length;
+    if (typeof Lenis !== 'undefined') {
+        lenis = new Lenis({
+            duration: 1.2,
+            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+            direction: 'vertical',
+            smooth: true,
+        });
+
+        function raf(time) {
+            lenis.raf(time);
+            if (content) {
+                let skew = lenis.velocity * 0.15;
+                content.style.transform = `skewY(${skew}deg)`;
+            }
+            requestAnimationFrame(raf);
         }
+        requestAnimationFrame(raf);
     } else {
-        typingElement.textContent = currentText.substring(0, currentCharIndex + 1);
-        currentCharIndex++;
-        
-        if (currentCharIndex === currentText.length) {
-            isDeleting = true;
+        document.body.style.overflow = 'auto';
+    }
+
+    // 2. HACKER TEXT
+    const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%&";
+    document.querySelectorAll(".hacker-text").forEach(element => {
+        element.addEventListener("mouseover", event => {
+            let iterations = 0;
+            const originalText = element.dataset.value;
+            const interval = setInterval(() => {
+                event.target.innerText = event.target.innerText
+                    .split("").map((letter, index) => {
+                        if(index < iterations) return originalText[index];
+                        return letters[Math.floor(Math.random() * 26)];
+                    }).join("");
+                if(iterations >= originalText.length) clearInterval(interval);
+                iterations += 1 / 3;
+            }, 30);
+        });
+    });
+
+    // 3. CURSOR
+    const cursorDot = document.querySelector('[data-cursor-dot]');
+    const cursorOutline = document.querySelector('[data-cursor-outline]');
+
+    if (cursorDot && cursorOutline) {
+        window.addEventListener('mousemove', (e) => {
+            const posX = e.clientX;
+            const posY = e.clientY;
+            cursorDot.style.left = `${posX}px`;
+            cursorDot.style.top = `${posY}px`;
+            cursorOutline.animate({
+                left: `${posX}px`,
+                top: `${posY}px`
+            }, { duration: 500, fill: "forwards" });
+        });
+    }
+
+    // 4. PRELOADER
+    const tl = gsap.timeline();
+    let counter = 0;
+    const counterElement = document.querySelector('.counter');
+    document.body.style.overflow = 'hidden';
+
+    const loaderInterval = setInterval(() => {
+        if(counter === 100) {
+            clearInterval(loaderInterval);
+            revealSite();
+        } else {
+            counter += Math.floor(Math.random() * 5) + 1;
+            if(counter > 100) counter = 100;
+            counterElement.textContent = counter.toString().padStart(3, '0');
         }
+    }, 20);
+
+    function revealSite() {
+        tl.to('.preloader', {
+            y: '-100%',
+            duration: 1.5,
+            ease: 'power4.inOut',
+            onComplete: () => { document.body.style.overflow = ''; }
+        })
+        .to('.hero-title span', {
+            y: 0,
+            duration: 1.2,
+            stagger: 0.1,
+            ease: 'power3.out'
+        }, "-=1")
+        .from('.hero-footer', {
+            opacity: 0,
+            y: 30,
+            duration: 1
+        }, "-=0.8");
     }
-    
-    setTimeout(typeEffect, isDeleting ? 50 : 100);
-}
 
-// Navbar scroll effect
-const navbar = document.getElementById('navbar');
-let lastScroll = 0;
+    // 5. PROJECT HOVER REVEAL (CORREÇÃO DE POSIÇÃO)
+    const projectItems = document.querySelectorAll('.project-item');
+    const revealContainer = document.querySelector('.hover-reveal');
+    const revealImg = document.querySelector('.reveal-img');
 
-window.addEventListener('scroll', () => {
-    const currentScroll = window.pageYOffset;
-    
-    if (currentScroll > 100) {
-        navbar.classList.add('scrolled');
-    } else {
-        navbar.classList.remove('scrolled');
-    }
-    
-    lastScroll = currentScroll;
-});
-
-// Mobile menu toggle
-const hamburger = document.getElementById('hamburger');
-const navMenu = document.getElementById('navMenu');
-
-if (hamburger && navMenu) {
-    hamburger.addEventListener('click', () => {
-        hamburger.classList.toggle('active');
-        navMenu.classList.toggle('active');
+    // Movimento suave seguindo o mouse
+    window.addEventListener('mousemove', (e) => {
+        gsap.to(revealContainer, {
+            x: e.clientX,
+            y: e.clientY,
+            xPercent: -50,
+            yPercent: -50,
+            duration: 0.5,
+            ease: 'power2.out'
+        });
     });
-}
 
-// Close mobile menu when clicking nav links
-const navLinks = document.querySelectorAll('.nav-link');
-navLinks.forEach(link => {
-    link.addEventListener('click', () => {
-        hamburger.classList.remove('active');
-        navMenu.classList.remove('active');
-    });
-});
-
-// Smooth scroll for anchor links
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        
-        if (target) {
-            target.scrollIntoView({
-                behavior: 'smooth',
-                block: 'start'
+    projectItems.forEach(item => {
+        // CORREÇÃO: Passamos o evento (e) para pegar a posição inicial exata
+        item.addEventListener('mouseenter', (e) => {
+            const imgUrl = item.getAttribute('data-img');
+            revealImg.src = imgUrl;
+            
+            // FORÇA a posição inicial para onde o mouse está AGORA
+            // Evita que a imagem apareça no canto (0,0)
+            gsap.set(revealContainer, { 
+                x: e.clientX, 
+                y: e.clientY,
+                xPercent: -50,
+                yPercent: -50
             });
-        }
+            
+            // Agora sim faz o fade in
+            gsap.to(revealContainer, { opacity: 1, duration: 0.3, scale: 1 });
+            gsap.to(revealImg, { scale: 1, duration: 0.3 });
+        });
+
+        item.addEventListener('mouseleave', () => {
+            gsap.to(revealContainer, { opacity: 0, duration: 0.3, scale: 0.8 });
+            gsap.to(revealImg, { scale: 1.2, duration: 0.3 });
+        });
     });
-});
 
-// Theme toggle
-const themeToggle = document.getElementById('themeToggle');
-const body = document.body;
+    // 6. WEBGL
+    if (typeof THREE !== 'undefined' && document.getElementById('webgl-container')) {
+        const scene = new THREE.Scene();
+        scene.fog = new THREE.FogExp2(0x050505, 0.002);
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+        const container = document.getElementById('webgl-container');
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+        container.appendChild(renderer.domElement);
 
-// Check for saved theme preference or default to dark
-const savedTheme = localStorage.getItem('theme') || 'dark';
-if (savedTheme === 'light') {
-    body.classList.add('light-mode');
-}
+        const geometry = new THREE.BufferGeometry();
+        const count = 2000;
+        const positions = new Float32Array(count * 3);
+        for(let i = 0; i < count * 3; i++) {
+            positions[i] = (Math.random() - 0.5) * 40;
+        }
+        geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+        const material = new THREE.PointsMaterial({
+            size: 0.04, color: 0xffffff, transparent: true, opacity: 0.4
+        });
+        const particles = new THREE.Points(geometry, material);
+        scene.add(particles);
 
-themeToggle.addEventListener('click', () => {
-    body.classList.toggle('light-mode');
-    
-    const isLight = body.classList.contains('light-mode');
-    const themeIcon = themeToggle.querySelector('i');
-    
-    if (isLight) {
-        themeIcon.classList.remove('fa-moon');
-        themeIcon.classList.add('fa-sun');
-        localStorage.setItem('theme', 'light');
-    } else {
-        themeIcon.classList.remove('fa-sun');
-        themeIcon.classList.add('fa-moon');
-        localStorage.setItem('theme', 'dark');
+        camera.position.z = 15;
+        let mouseX = 0, mouseY = 0;
+        let targetX = 0, targetY = 0;
+
+        window.addEventListener('mousemove', (e) => {
+            mouseX = (e.clientX / window.innerWidth - 0.5) * 2;
+            mouseY = (e.clientY / window.innerHeight - 0.5) * 2;
+        });
+
+        const clock = new THREE.Clock();
+        function animate() {
+            targetX = mouseX * 0.5;
+            targetY = mouseY * 0.5;
+            particles.rotation.y += 0.002;
+            particles.rotation.x += (targetY - particles.rotation.x) * 0.05;
+            particles.rotation.y += (targetX - particles.rotation.y) * 0.05;
+            renderer.render(scene, camera);
+            requestAnimationFrame(animate);
+        }
+        animate();
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+    }
+
+    // 7. PARALLAX
+    if(document.querySelector(".profile-pic")) {
+        gsap.to(".profile-pic", {
+            yPercent: 20,
+            ease: "none",
+            scrollTrigger: {
+                trigger: ".about-container",
+                start: "top bottom",
+                end: "bottom top",
+                scrub: true
+            }
+        });
     }
 });
-
-// Update icon on page load
-if (body.classList.contains('light-mode')) {
-    const themeIcon = themeToggle.querySelector('i');
-    themeIcon.classList.remove('fa-moon');
-    themeIcon.classList.add('fa-sun');
-}
-
-// Intersection Observer for animations
-const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px'
-};
-
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.style.opacity = '1';
-            entry.target.style.transform = 'translateY(0)';
-        }
-    });
-}, observerOptions);
-
-// Observe elements for animation
-document.addEventListener('DOMContentLoaded', () => {
-    const animateElements = document.querySelectorAll('.project-card, .skill-category, .about-card, .contact-method');
-    
-    animateElements.forEach(el => {
-        el.style.opacity = '0';
-        el.style.transform = 'translateY(30px)';
-        el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-        observer.observe(el);
-    });
-});
-
-// Form submission
-const contactForm = document.getElementById('contactForm');
-
-if (contactForm) {
-    contactForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-        
-        // Get form data
-        const formData = new FormData(contactForm);
-        const name = formData.get('name');
-        const email = formData.get('email');
-        const message = formData.get('message');
-        
-        // Here you would normally send the data to a server
-        // For now, we'll just show an alert
-        alert(`Obrigado, ${name}! Sua mensagem foi enviada com sucesso. Entrarei em contato em breve!`);
-        
-        // Reset form
-        contactForm.reset();
-    });
-}
-
-// Parallax effect for hero background
-window.addEventListener('scroll', () => {
-    const scrollY = window.pageYOffset;
-    const heroBackground = document.querySelector('.hero-background');
-    
-    if (heroBackground) {
-        heroBackground.style.transform = `translateY(${scrollY * 0.5}px)`;
-    }
-});
-
-// Initialize typing effect
-document.addEventListener('DOMContentLoaded', () => {
-    typeEffect();
-});
-
-// Add active class to current nav link
-window.addEventListener('scroll', () => {
-    let current = '';
-    const sections = document.querySelectorAll('section[id]');
-    
-    sections.forEach(section => {
-        const sectionTop = section.offsetTop;
-        const sectionHeight = section.clientHeight;
-        
-        if (window.pageYOffset >= sectionTop - 200) {
-            current = section.getAttribute('id');
-        }
-    });
-    
-    navLinks.forEach(link => {
-        link.classList.remove('active');
-        if (link.getAttribute('href') === `#${current}`) {
-            link.classList.add('active');
-        }
-    });
-});
-
-// Add hover effect to glass cards
-const glassCards = document.querySelectorAll('.glass-card');
-glassCards.forEach(card => {
-    card.addEventListener('mousemove', (e) => {
-        const rect = card.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-        
-        const centerX = rect.width / 2;
-        const centerY = rect.height / 2;
-        
-        const rotateX = (y - centerY) / 10;
-        const rotateY = (centerX - x) / 10;
-        
-        card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
-    });
-    
-    card.addEventListener('mouseleave', () => {
-        card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0)';
-    });
-});
-
-// Add scroll progress indicator
-window.addEventListener('scroll', () => {
-    const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-    const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-    const scrolled = (winScroll / height) * 100;
-    
-    // You can add a progress bar if needed
-});
-
-// Console easter egg
-console.log('%c🚀 Gabriel Abel - Desenvolvedor Full Stack', 'font-size: 20px; font-weight: bold; color: #6366f1;');
-console.log('%cInteressado em trabalhar juntos? Entre em contato!', 'font-size: 14px; color: #8b5cf6;');
