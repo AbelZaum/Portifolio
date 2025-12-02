@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
     
-    // 1. LENIS SMOOTH SCROLL
+    // 1. LENIS SMOOTH SCROLL + DEPTH SCALE (NOVO EFEITO)
     let lenis;
     const content = document.getElementById('content-skew');
     
@@ -14,10 +14,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
         function raf(time) {
             lenis.raf(time);
-            if (content) {
-                let skew = lenis.velocity * 0.15;
-                content.style.transform = `skewY(${skew}deg)`;
+            
+            // EFEITO DE PROFUNDIDADE 3D
+            // Quando rola, o site escala levemente para trás (0.98)
+            if (content && window.innerWidth > 768) {
+                const scale = 1 - Math.min(Math.abs(lenis.velocity * 0.0005), 0.02);
+                content.style.transform = `scale(${scale})`;
+                content.style.transformOrigin = 'center center';
+                content.style.transition = 'transform 0.1s ease-out';
             }
+            
             requestAnimationFrame(raf);
         }
         requestAnimationFrame(raf);
@@ -25,7 +31,46 @@ document.addEventListener("DOMContentLoaded", () => {
         document.body.style.overflow = 'auto';
     }
 
-    // 2. HACKER TEXT
+    // 2. GSAP SCROLL REVEAL (ANIMAÇÃO PREMIUM DE ENTRADA)
+    if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+        gsap.registerPlugin(ScrollTrigger);
+
+        const projectItems = document.querySelectorAll('.project-item');
+        
+        projectItems.forEach((item, index) => {
+            gsap.fromTo(item, 
+                { 
+                    y: 100, // Começa abaixo
+                    opacity: 0 
+                },
+                {
+                    y: 0, // Sobe para posição original
+                    opacity: 1,
+                    duration: 1,
+                    ease: "power4.out",
+                    scrollTrigger: {
+                        trigger: item,
+                        start: "top 85%", // Dispara quando o item entra na tela
+                        toggleActions: "play none none reverse"
+                    }
+                }
+            );
+        });
+
+        // Animação do Título "Selected Works"
+        gsap.from(".section-header h2", {
+            y: 50,
+            opacity: 0,
+            duration: 1,
+            ease: "power3.out",
+            scrollTrigger: {
+                trigger: ".projects",
+                start: "top 80%"
+            }
+        });
+    }
+
+    // 3. HACKER TEXT EFFECT
     const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%&";
     document.querySelectorAll(".hacker-text").forEach(element => {
         element.addEventListener("mouseover", event => {
@@ -43,7 +88,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    // 3. CURSOR
+    // 4. CURSOR CUSTOMIZADO
     const cursorDot = document.querySelector('[data-cursor-dot]');
     const cursorOutline = document.querySelector('[data-cursor-outline]');
 
@@ -60,7 +105,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // 4. PRELOADER
+    // 5. PRELOADER
     const tl = gsap.timeline();
     let counter = 0;
     const counterElement = document.querySelector('.counter');
@@ -97,8 +142,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }, "-=0.8");
     }
 
-    // 5. PROJECT HOVER REVEAL (CORREÇÃO DE POSIÇÃO)
-    const projectItems = document.querySelectorAll('.project-item');
+    // 6. PROJECT HOVER REVEAL (CORRIGIDO E OTIMIZADO)
     const revealContainer = document.querySelector('.hover-reveal');
     const revealImg = document.querySelector('.reveal-img');
 
@@ -114,14 +158,12 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    projectItems.forEach(item => {
-        // CORREÇÃO: Passamos o evento (e) para pegar a posição inicial exata
+    document.querySelectorAll('.project-item').forEach(item => {
         item.addEventListener('mouseenter', (e) => {
             const imgUrl = item.getAttribute('data-img');
             revealImg.src = imgUrl;
             
-            // FORÇA a posição inicial para onde o mouse está AGORA
-            // Evita que a imagem apareça no canto (0,0)
+            // FORÇA a posição inicial para o mouse atual
             gsap.set(revealContainer, { 
                 x: e.clientX, 
                 y: e.clientY,
@@ -129,7 +171,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 yPercent: -50
             });
             
-            // Agora sim faz o fade in
             gsap.to(revealContainer, { opacity: 1, duration: 0.3, scale: 1 });
             gsap.to(revealImg, { scale: 1, duration: 0.3 });
         });
@@ -140,7 +181,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    // 6. WEBGL
+    // 7. WEBGL & PARALLAX
     if (typeof THREE !== 'undefined' && document.getElementById('webgl-container')) {
         const scene = new THREE.Scene();
         scene.fog = new THREE.FogExp2(0x050505, 0.002);
@@ -191,7 +232,6 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // 7. PARALLAX
     if(document.querySelector(".profile-pic")) {
         gsap.to(".profile-pic", {
             yPercent: 20,
