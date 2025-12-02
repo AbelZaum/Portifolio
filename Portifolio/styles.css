@@ -493,40 +493,30 @@ nav {
 }
 
 /* =========================================
-   RESPONSIVE
+   RESPONSIVE (MOBILE FIX)
    ========================================= */
-@media (max-width: 1440px) {
-    .hero-title { font-size: 8.5vw; }
-    .parallax-image { height: 550px; }
-}
-
-@media (max-width: 1024px) {
-    .hero-title { font-size: 9vw; }
-    .about-container { grid-template-columns: 1fr; gap: 50px; }
-    .about-image-section { order: -1; }
-    .parallax-image { height: 500px; }
-}
-
 @media (max-width: 768px) {
+    /* 1. Desativa cursor custom no mobile (melhora performance) */
     .cursor-dot, .cursor-outline { display: none; }
     * { cursor: auto !important; }
 
-    nav { padding: 30px 20px; }
+    /* 2. Ajuste do Menu */
+    nav { padding: 25px 20px; }
 
+    /* 3. Hero Section */
     .hero {
         padding: 100px 20px 40px 20px;
-        justify-content: center;
     }
 
     .hero-title { 
-        font-size: 12.5vw;
+        font-size: 12.5vw; 
         white-space: normal;
         word-break: break-word;
-        line-height: 1.1;
+        line-height: 1.05;
     }
 
     .hero-footer {
-        left: 20px; right: 20px; bottom: 20px;
+        left: 20px; right: 20px; bottom: 30px;
         flex-direction: column;
         align-items: flex-start;
         gap: 20px;
@@ -534,22 +524,65 @@ nav {
 
     .hero-bio p { text-align: left; font-size: 1rem; }
 
-    .projects, .about, .footer { padding: 80px 20px; }
-
+    /* 4. Projetos */
+    .projects { padding: 80px 20px; }
     .project-item { flex-direction: column; align-items: flex-start; gap: 10px; }
-    .p-name { font-size: 10vw; }
-    .hover-reveal { display: none; } /* Esconde no mobile */
+    .p-name { font-size: 11vw; line-height: 1.1; }
+    .hover-reveal { display: none; } /* Esconde a imagem flutuante no mobile */
 
-    .parallax-image { height: 400px; }
-    .about-title { font-size: 12vw; }
-    .about-desc { font-size: 1.1rem; }
-
-    .email-big { font-size: 11vw; }
-
-    .footer-bottom {
-        flex-direction: column;
-        gap: 20px;
-        align-items: flex-start;
+    /* 5. ABOUT SECTION (O FIX DA SUA FOTO E TÍTULO) */
+    .about { 
+        padding: 60px 20px; /* Reduzi padding para dar espaço ao texto */
     }
+
+    .about-container { 
+        grid-template-columns: 1fr; /* Uma coluna */
+        gap: 40px; 
+        display: flex;
+        flex-direction: column;
+    }
+
+    .about-image-section { 
+        order: -1; /* Joga a foto para cima */
+        width: 100%;
+    }
+
+    .parallax-image { 
+        height: 50vh; /* Ocupa 50% da altura da tela */
+        max-height: 500px; /* Limite para não ficar gigante */
+        min-height: 350px;
+    }
+
+    .about-text-section {
+        width: 100%;
+    }
+
+    .about-title { 
+        /* O AJUSTE MÁGICO: */
+        font-size: 10.5vw; /* Reduzi para caber "ARCHITECT" */
+        line-height: 0.95;
+        word-wrap: break-word; /* Segurança */
+        margin-bottom: 25px;
+    }
+
+    .about-desc { 
+        font-size: 1.1rem; 
+        max-width: 100%;
+    }
+
+    .tech-stack {
+        justify-content: flex-start;
+    }
+
+    .tech-stack span {
+        font-size: 0.8rem;
+        padding: 10px 20px;
+    }
+
+    /* 6. Footer */
+    .footer { padding: 60px 20px; height: auto; min-height: 80vh; }
+    .email-big { font-size: 10vw; word-break: break-all; }
+    .footer-bottom { flex-direction: column; gap: 30px; align-items: flex-start; }
     .socials { flex-direction: column; gap: 15px; }
 }
+
