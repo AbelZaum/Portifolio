@@ -4,7 +4,8 @@
    :root {
     --bg-color: #050505;
     --text-color: #f0f0f0;
-    --accent: #d4fa36;
+    --accent: #d4fa36; /* Acid Green */
+    --accent-dim: #2a330b;
     --font-display: 'Syne', sans-serif;
     --font-mono: 'Space Grotesk', monospace;
 }
@@ -13,12 +14,12 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    cursor: none !important;
+    cursor: none !important; /* Cursor customizado obrigatório */
 }
 
 html, body {
     width: 100%;
-    overflow-x: hidden;
+    overflow-x: hidden; /* Previne scroll horizontal */
 }
 
 body {
@@ -28,18 +29,23 @@ body {
     -webkit-font-smoothing: antialiased;
 }
 
+/* Esconde barra de scroll nativa */
 ::-webkit-scrollbar {
     width: 0px;
     background: transparent;
 }
 
 /* =========================================
-   UTILITIES
+   UTILITIES & EFFECTS
    ========================================= */
+
+/* NOISE OVERLAY */
 .noise {
     position: fixed;
-    top: 0; left: 0;
-    width: 100vw; height: 100vh;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
     pointer-events: none;
     z-index: 9000;
     opacity: 0.05;
@@ -47,8 +53,10 @@ body {
     filter: contrast(170%) brightness(100%);
 }
 
+/* CUSTOM CURSOR */
 .cursor-dot {
-    width: 8px; height: 8px;
+    width: 8px;
+    height: 8px;
     background-color: var(--accent);
     border-radius: 50%;
     position: fixed;
@@ -60,7 +68,8 @@ body {
 }
 
 .cursor-outline {
-    width: 40px; height: 40px;
+    width: 40px;
+    height: 40px;
     border: 1px solid rgba(255, 255, 255, 0.8);
     border-radius: 50%;
     position: fixed;
@@ -76,6 +85,7 @@ body:hover .cursor-outline {
     background: rgba(255, 255, 255, 0.1);
 }
 
+/* PRELOADER */
 .preloader {
     position: fixed;
     top: 0; left: 0;
@@ -106,6 +116,7 @@ body:hover .cursor-outline {
     font-family: var(--font-mono);
 }
 
+/* WEBGL BACKGROUND */
 #webgl-container {
     position: fixed;
     top: 0; left: 0;
@@ -136,7 +147,7 @@ nav {
 }
 
 /* =========================================
-   HERO
+   HERO SECTION
    ========================================= */
 .hero {
     min-height: 100vh;
@@ -166,13 +177,15 @@ nav {
 
 .hero-title {
     font-family: var(--font-display);
-    font-size: 8vw; 
+    /* 8.2vw: Tamanho seguro para desktop */
+    font-size: 8.2vw; 
     line-height: 1.05;
     text-transform: uppercase;
     font-weight: 800;
     white-space: nowrap;
     margin: 10px 0;
     width: 100%;
+    text-align: center;
 }
 
 @media (min-width: 1800px) {
@@ -230,7 +243,7 @@ nav {
 }
 
 /* =========================================
-   MARQUEE
+   MARQUEE SECTION
    ========================================= */
 .marquee-section {
     padding: 80px 0;
@@ -262,7 +275,7 @@ nav {
 }
 
 /* =========================================
-   PROJECTS
+   PROJECTS SECTION
    ========================================= */
 .projects {
     padding: 150px 50px;
@@ -297,6 +310,7 @@ nav {
     color: var(--text-color);
     transition: all 0.4s ease;
     position: relative;
+    opacity: 1; /* Garantia para animação JS */
 }
 
 .project-item:hover {
@@ -345,7 +359,7 @@ nav {
     overflow: hidden;
     border-radius: 8px;
     box-shadow: 0 20px 50px rgba(0,0,0,0.5);
-    /* SEM TRANSFORM NO CSS */
+    /* JS controla a posição, sem transform aqui */
 }
 
 .reveal-inner { width: 100%; height: 100%; overflow: hidden; }
@@ -359,7 +373,7 @@ nav {
 }
 
 /* =========================================
-   ABOUT
+   ABOUT SECTION
    ========================================= */
 .about {
     padding: 100px 50px;
@@ -431,7 +445,7 @@ nav {
 }
 
 /* =========================================
-   FOOTER
+   FOOTER SECTION
    ========================================= */
 .footer {
     height: 90vh;
@@ -460,7 +474,7 @@ nav {
 
 .email-big {
     font-family: var(--font-display);
-    /* DIMINUÍDO DE 7vw PARA 4vw (Mais elegante) */
+    /* Fonte reduzida para elegância */
     font-size: 4vw; 
     color: var(--text-color);
     text-decoration: none;
@@ -468,14 +482,14 @@ nav {
     font-weight: 800;
     transition: 0.3s;
     word-break: break-all;
-    margin-top: 10px;
     display: inline-block;
+    margin-top: 10px;
 }
 
 .email-big:hover { 
     color: var(--accent); 
     -webkit-text-stroke: 1px var(--accent);
-    transform: translateX(10px); /* Leve movimento ao passar o mouse */
+    transform: translateX(10px);
 }
 
 .footer-bottom {
@@ -497,23 +511,31 @@ nav {
 }
 
 /* =========================================
-   RESPONSIVE (MOBILE FIX)
+   RESPONSIVE (MOBILE & TABLET)
    ========================================= */
+@media (max-width: 1440px) {
+    .hero-title { font-size: 8.5vw; }
+    .parallax-image { height: 550px; }
+}
+
+@media (max-width: 1024px) {
+    .hero-title { font-size: 9vw; }
+    .about-container { grid-template-columns: 1fr; gap: 50px; }
+    .about-image-section { order: -1; }
+    .parallax-image { height: 500px; }
+}
+
+/* MOBILE FIX */
 @media (max-width: 768px) {
-    /* 1. Desativa cursor custom no mobile (melhora performance) */
     .cursor-dot, .cursor-outline { display: none; }
     * { cursor: auto !important; }
 
-    /* 2. Ajuste do Menu */
     nav { padding: 25px 20px; }
 
-    /* 3. Hero Section */
-    .hero {
-        padding: 100px 20px 40px 20px;
-    }
+    .hero { padding: 100px 20px 40px 20px; }
 
     .hero-title { 
-        font-size: 12.5vw; 
+        font-size: 12.5vw;
         white-space: normal;
         word-break: break-word;
         line-height: 1.05;
@@ -528,66 +550,39 @@ nav {
 
     .hero-bio p { text-align: left; font-size: 1rem; }
 
-    /* 4. Projetos */
     .projects { padding: 80px 20px; }
     .project-item { flex-direction: column; align-items: flex-start; gap: 10px; }
-    .p-name { font-size: 11vw; line-height: 1.1; }
-    .hover-reveal { display: none; } /* Esconde a imagem flutuante no mobile */
+    .p-name { font-size: 11vw; }
+    .hover-reveal { display: none; }
 
-    /* 5. ABOUT SECTION (O FIX DA SUA FOTO E TÍTULO) */
-    .about { 
-        padding: 60px 20px; /* Reduzi padding para dar espaço ao texto */
-    }
-
+    /* Fix About & Foto */
+    .about { padding: 60px 20px; }
     .about-container { 
-        grid-template-columns: 1fr; /* Uma coluna */
+        grid-template-columns: 1fr; 
         gap: 40px; 
-        display: flex;
-        flex-direction: column;
     }
-
-    .about-image-section { 
-        order: -1; /* Joga a foto para cima */
-        width: 100%;
-    }
-
     .parallax-image { 
-        height: 50vh; /* Ocupa 50% da altura da tela */
-        max-height: 500px; /* Limite para não ficar gigante */
+        height: 50vh; 
+        max-height: 500px;
         min-height: 350px;
     }
-
-    .about-text-section {
-        width: 100%;
-    }
-
     .about-title { 
-        font-size: 10.5vw;
+        font-size: 10.5vw; /* Cabe "ARCHITECT" */
         line-height: 0.95;
         margin-bottom: 25px;
     }
+    .about-desc { font-size: 1.1rem; }
 
-    .about-desc { 
-        font-size: 1.1rem; 
-        max-width: 100%;
-    }
-
-    .tech-stack {
-        justify-content: flex-start;
-    }
-
-    .tech-stack span {
-        font-size: 0.8rem;
-        padding: 10px 20px;
-    }
-
-    /* 6. Footer */
     .footer { padding: 60px 20px; height: auto; min-height: 80vh; }
+    
     .email-big { 
-        font-size: 7vw; /* Diminuído de 11vw para 7vw */
+        font-size: 7vw; /* Menor no mobile */
     }
-    .footer-bottom { flex-direction: column; gap: 30px; align-items: flex-start; }
+
+    .footer-bottom {
+        flex-direction: column;
+        gap: 30px;
+        align-items: flex-start;
+    }
     .socials { flex-direction: column; gap: 15px; }
 }
-
-
