@@ -4,8 +4,7 @@
    :root {
     --bg-color: #050505;
     --text-color: #f0f0f0;
-    --accent: #d4fa36; /* Acid Green */
-    --accent-dim: #2a330b;
+    --accent: #d4fa36;
     --font-display: 'Syne', sans-serif;
     --font-mono: 'Space Grotesk', monospace;
 }
@@ -14,12 +13,12 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    cursor: none !important; /* Cursor customizado obrigatório */
+    cursor: none !important;
 }
 
 html, body {
     width: 100%;
-    overflow-x: hidden; /* Previne scroll horizontal */
+    overflow-x: hidden;
 }
 
 body {
@@ -29,23 +28,18 @@ body {
     -webkit-font-smoothing: antialiased;
 }
 
-/* Esconde barra de scroll nativa */
 ::-webkit-scrollbar {
     width: 0px;
     background: transparent;
 }
 
 /* =========================================
-   UTILITIES & EFFECTS
+   UTILITIES
    ========================================= */
-
-/* NOISE OVERLAY */
 .noise {
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
+    top: 0; left: 0;
+    width: 100vw; height: 100vh;
     pointer-events: none;
     z-index: 9000;
     opacity: 0.05;
@@ -53,10 +47,8 @@ body {
     filter: contrast(170%) brightness(100%);
 }
 
-/* CUSTOM CURSOR */
 .cursor-dot {
-    width: 8px;
-    height: 8px;
+    width: 8px; height: 8px;
     background-color: var(--accent);
     border-radius: 50%;
     position: fixed;
@@ -68,8 +60,7 @@ body {
 }
 
 .cursor-outline {
-    width: 40px;
-    height: 40px;
+    width: 40px; height: 40px;
     border: 1px solid rgba(255, 255, 255, 0.8);
     border-radius: 50%;
     position: fixed;
@@ -85,7 +76,6 @@ body:hover .cursor-outline {
     background: rgba(255, 255, 255, 0.1);
 }
 
-/* PRELOADER */
 .preloader {
     position: fixed;
     top: 0; left: 0;
@@ -116,7 +106,6 @@ body:hover .cursor-outline {
     font-family: var(--font-mono);
 }
 
-/* WEBGL BACKGROUND */
 #webgl-container {
     position: fixed;
     top: 0; left: 0;
@@ -147,7 +136,7 @@ nav {
 }
 
 /* =========================================
-   HERO SECTION
+   HERO
    ========================================= */
 .hero {
     min-height: 100vh;
@@ -177,15 +166,13 @@ nav {
 
 .hero-title {
     font-family: var(--font-display);
-    /* 8.2vw: Tamanho seguro para desktop */
-    font-size: 8.2vw; 
+    font-size: 8vw; 
     line-height: 1.05;
     text-transform: uppercase;
     font-weight: 800;
     white-space: nowrap;
     margin: 10px 0;
     width: 100%;
-    text-align: center;
 }
 
 @media (min-width: 1800px) {
@@ -243,7 +230,7 @@ nav {
 }
 
 /* =========================================
-   MARQUEE SECTION
+   MARQUEE
    ========================================= */
 .marquee-section {
     padding: 80px 0;
@@ -275,7 +262,7 @@ nav {
 }
 
 /* =========================================
-   PROJECTS SECTION
+   PROJECTS
    ========================================= */
 .projects {
     padding: 150px 50px;
@@ -310,7 +297,6 @@ nav {
     color: var(--text-color);
     transition: all 0.4s ease;
     position: relative;
-    opacity: 1; /* Garantia para animação JS */
 }
 
 .project-item:hover {
@@ -359,7 +345,7 @@ nav {
     overflow: hidden;
     border-radius: 8px;
     box-shadow: 0 20px 50px rgba(0,0,0,0.5);
-    /* JS controla a posição, sem transform aqui */
+    /* SEM TRANSFORM NO CSS */
 }
 
 .reveal-inner { width: 100%; height: 100%; overflow: hidden; }
@@ -373,7 +359,7 @@ nav {
 }
 
 /* =========================================
-   ABOUT SECTION
+   ABOUT
    ========================================= */
 .about {
     padding: 100px 50px;
@@ -445,7 +431,7 @@ nav {
 }
 
 /* =========================================
-   FOOTER SECTION
+   FOOTER
    ========================================= */
 .footer {
     height: 90vh;
@@ -474,22 +460,18 @@ nav {
 
 .email-big {
     font-family: var(--font-display);
-    /* Fonte reduzida para elegância */
-    font-size: 4vw; 
+    font-size: 7vw;
     color: var(--text-color);
     text-decoration: none;
     line-height: 1;
     font-weight: 800;
     transition: 0.3s;
     word-break: break-all;
-    display: inline-block;
-    margin-top: 10px;
 }
 
 .email-big:hover { 
     color: var(--accent); 
     -webkit-text-stroke: 1px var(--accent);
-    transform: translateX(10px);
 }
 
 .footer-bottom {
@@ -511,7 +493,7 @@ nav {
 }
 
 /* =========================================
-   RESPONSIVE (MOBILE & TABLET)
+   RESPONSIVE
    ========================================= */
 @media (max-width: 1440px) {
     .hero-title { font-size: 8.5vw; }
@@ -525,24 +507,26 @@ nav {
     .parallax-image { height: 500px; }
 }
 
-/* MOBILE FIX */
 @media (max-width: 768px) {
     .cursor-dot, .cursor-outline { display: none; }
     * { cursor: auto !important; }
 
-    nav { padding: 25px 20px; }
+    nav { padding: 30px 20px; }
 
-    .hero { padding: 100px 20px 40px 20px; }
+    .hero {
+        padding: 100px 20px 40px 20px;
+        justify-content: center;
+    }
 
     .hero-title { 
         font-size: 12.5vw;
         white-space: normal;
         word-break: break-word;
-        line-height: 1.05;
+        line-height: 1.1;
     }
 
     .hero-footer {
-        left: 20px; right: 20px; bottom: 30px;
+        left: 20px; right: 20px; bottom: 20px;
         flex-direction: column;
         align-items: flex-start;
         gap: 20px;
@@ -550,39 +534,62 @@ nav {
 
     .hero-bio p { text-align: left; font-size: 1rem; }
 
-    .projects { padding: 80px 20px; }
+    .projects, .about, .footer { padding: 80px 20px; }
+
     .project-item { flex-direction: column; align-items: flex-start; gap: 10px; }
-    .p-name { font-size: 11vw; }
-    .hover-reveal { display: none; }
+    .p-name { font-size: 10vw; }
+    .hover-reveal { display: none; } /* Esconde no mobile */
 
-    /* Fix About & Foto */
-    .about { padding: 60px 20px; }
-    .about-container { 
-        grid-template-columns: 1fr; 
-        gap: 40px; 
-    }
-    .parallax-image { 
-        height: 50vh; 
-        max-height: 500px;
-        min-height: 350px;
-    }
-    .about-title { 
-        font-size: 10.5vw; /* Cabe "ARCHITECT" */
-        line-height: 0.95;
-        margin-bottom: 25px;
-    }
-    .about-desc { font-size: 1.1rem; }
-
-    .footer { padding: 60px 20px; height: auto; min-height: 80vh; }
+    .parallax-image { height: 400px; }
     
-    .email-big { 
-        font-size: 7vw; /* Menor no mobile */
+    /* About Section - Mobile Fixes */
+    .about-title { 
+        font-size: 11vw;
+        line-height: 1;
+        word-break: break-word;
+        hyphens: auto;
     }
+    
+    .about-desc { 
+        font-size: 1rem; 
+        line-height: 1.7;
+        text-align: left;
+    }
+    
+    .tech-stack {
+        gap: 10px;
+        justify-content: flex-start;
+    }
+    
+    .tech-stack span {
+        padding: 10px 18px;
+        font-size: 0.8rem;
+    }
+
+    .email-big { font-size: 8vw; }
 
     .footer-bottom {
         flex-direction: column;
-        gap: 30px;
+        gap: 20px;
         align-items: flex-start;
     }
     .socials { flex-direction: column; gap: 15px; }
+}
+
+/* Extra small devices */
+@media (max-width: 400px) {
+    .about-title { 
+        font-size: 10vw;
+    }
+    
+    .tech-stack span {
+        padding: 8px 14px;
+        font-size: 0.75rem;
+    }
+    
+    .email-big { font-size: 7vw; }
+    
+    .marquee span {
+        font-size: 2.5rem;
+    }
 }
